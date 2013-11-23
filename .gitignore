@@ -1,0 +1,25 @@
+# Python bytecode:
+*.py[co]
+
+# Virtualenv:
+/env
+
+# Site-local media:
+/public/media
+/public/static
+
+# Packaging files:
+*.egg*
+
+# Editor temp files:
+*.swp
+*~
+
+# Sphinx docs:
+_build
+
+# SQLite3 database files:
+*.db
+
+# Logs:
+*.log
