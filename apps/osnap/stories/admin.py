@@ -1,0 +1,12 @@
+from django.contrib import admin
+
+from .models import Story
+
+class StoryAdmin(admin.ModelAdmin):
+    date_hierarchy = 'submit_date'
+    list_display = ('submit_date', 'title', 'domain', 'submitter')
+    list_display_links = ('title',)
+
+
+admin.site.register(Story, StoryAdmin)
+
