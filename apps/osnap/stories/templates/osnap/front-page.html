@@ -1,0 +1,21 @@
+{% extends "skeleton.html" %}
+
+{% comment %}
+    Greets users when they log in, by displaying a set of popular and new
+    stories.
+
+    Template variables:
+    stories - A list of stories to display. Required.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}{% trans "Front Page" %}{% endblock title %}
+
+
+{% block body %}
+
+    {% include "osnap/stories/list.html" with stories=stories %}
+
+{% endblock body %}
+

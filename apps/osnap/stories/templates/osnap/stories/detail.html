@@ -1,0 +1,31 @@
+{% extends "skeleton.html" %}
+
+{% comment %}
+    Displays a single story, as well as its comments.
+
+    Template variables:
+    story - A single story to display. Required.
+{% endcomment %}
+
+{% load i18n %}
+
+{% block title %}{{ story.title }}{% endblock title %}
+
+
+{% block body %}
+
+    <div class="story-info">
+        {% include "osnap/stories/story-info.html" with story=story %}
+    </div>
+
+    {% if story.text %}
+        <div class="story-text">
+            {# TODO: Markdown. #}
+            {{ story.text|linebreaks }}
+        </div>
+    {% else %}
+        <hr>
+    {% endif %}
+
+{% endblock body %}
+

@@ -1,0 +1,33 @@
+{% comment %}
+    Template variables:
+    story - A single Story model. Required.
+
+    Expected surroundings:
+    A container with class story-info.
+{% endcomment %}
+
+{% load humanize %}
+{% load i18n %}
+
+<p class="story-leader">
+    {% if story.url %}
+        <a class="story-link" href="{{ story.url }}">{{ story.title }}</a>
+        <span class="story-origin">{{ story.domain }}</span>
+    {% else %}
+        <a class="story-link" href="{{ story.get_absolute_url }}">{{ story.title }}</a>
+    {% endif %}
+</p>
+
+<p class="story-byline">
+    {% if story.submitter %}
+        {% blocktrans with username=story.submitter.username %}
+            submitted by {{ username }}
+        {% endblocktrans %}
+    {% else %}
+        {% trans "submitted by a ghost" %}
+    {% endif %}
+    <date datetime="{{ story.submit_date|date:'c' }}" title="{{ story.submit_date|date:'DATETIME_FORMAT' }}">
+        {{ story.submit_date|naturaltime }}
+    </date>
+</p>
+

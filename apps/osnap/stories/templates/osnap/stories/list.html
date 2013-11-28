@@ -1,0 +1,16 @@
+{% comment %}
+    Used to display a list of stories, as on the front page, a user profile,
+    etc. etc.
+
+    Template variables:
+    stories - A list of Story models. Required.
+{% endcomment %}
+
+<ul class="stories">
+    {% for story in stories %}
+        <li class="story-info">
+            {% include "osnap/stories/story-info.html" with story=story %}
+        </li>
+    {% endfor %}
+</ul>
+

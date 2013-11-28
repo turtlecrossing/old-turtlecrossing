@@ -62,3 +62,7 @@ class Story(models.Model):
                 code='both_types'
             )
 
+    def get_absolute_url(self):
+        from django.core.urlresolvers import reverse
+        return reverse('osnap-story-detail', kwargs={'id': self.id})
+

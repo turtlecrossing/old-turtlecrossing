@@ -1,0 +1,38 @@
+/* Turtle Crossing: Elements of Style. */
+
+.story-origin {
+    font-size: 85%;
+    color: @gray;
+}
+
+.story-byline {
+    font-size: 85%;
+    line-height: 85%;
+    color: @gray;
+}
+
+.story-info .story-leader {
+    margin-bottom: 2px;
+}
+
+.story-origin:before {
+    content: "(";
+}
+
+.story-origin:after {
+    content: ")";
+}
+
+.story-text {
+    /* Copied from .panel. */
+    margin-bottom: @line-height-computed;
+    padding: 15px;
+
+    background-color: @panel-bg;
+    border: 1px solid transparent;
+    border-radius: @panel-border-radius;
+    .box-shadow(0 1px 1px rgba(0,0,0,.05));
+
+    .panel-variant(@panel-default-border; @panel-default-text; @panel-default-heading-bg; @panel-default-border);
+}
+

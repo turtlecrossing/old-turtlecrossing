@@ -18,6 +18,15 @@ class StoryModelTests(SimpleTestCase):
         self.assertEquals(str(question), u"How do I get into Red Hat Tower?")
         self.assertEquals(question.domain, u"")
 
+    def test_get_absolute_url(self):
+        # Besides coverage, the main goal of testing this is to avoid
+        # breaking links.
+        link = Story(title=u"Best Web site ever",
+                     url=u"http://www.example.com/",
+                     id=555)
+
+        self.assertEquals(link.get_absolute_url(), "/stories/555/")
+
     def test_content_types(self):
         story = Story(title=u"Best Web site ever")
         self.assertModelDoesNotValidate(story, 'neither_type')
