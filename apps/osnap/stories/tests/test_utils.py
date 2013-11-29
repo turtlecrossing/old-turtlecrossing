@@ -1,3 +1,11 @@
+"""
+osnap.stories.tests.test_models
+===============================
+These test our industry-standard `utils.py` file full of random stuff.
+
+:copyright: (C) 2013 Matthew Frazier
+:license:   GNU GPL version 2 or later, see LICENSE for details
+"""
 from functools import wraps
 
 from django.test import SimpleTestCase

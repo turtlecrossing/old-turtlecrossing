@@ -1,3 +1,11 @@
+"""
+turtlecrossing.urls
+===================
+The project's root URLConf!
+
+:copyright: (C) 2013 Matthew Frazier
+:license:   GNU GPL version 2 or later, see LICENSE for details
+"""
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 
@@ -11,6 +19,7 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
 
+    # Everything here is really under stories/.
     url(r'^', include('osnap.stories.urls')),
 )
 

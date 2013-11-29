@@ -1,3 +1,11 @@
+"""
+osnap.stories.models
+====================
+Database models! These are fairly simple.
+
+:copyright: (C) 2013 Matthew Frazier
+:license:   GNU GPL version 2 or later, see LICENSE for details
+"""
 from urlparse import urlparse
 
 from django.conf import settings

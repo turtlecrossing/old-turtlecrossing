@@ -1,3 +1,12 @@
+"""
+osnap.stories.urls
+==================
+A default URLConf. Aside from the front page, this all uses ``stories/``
+as a prefix. (I may need to rethink this in the future.)
+
+:copyright: (C) 2013 Matthew Frazier
+:license:   GNU GPL version 2 or later, see LICENSE for details
+"""
 from django.conf.urls import patterns
 from django.conf.urls import url
 

@@ -1,5 +1,11 @@
-"""Common settings and globals."""
+"""
+turtlecrossing.settings.base
+============================
+Settings which apply in all environments.
 
+:copyright: (C) 2013 Matthew Frazier
+:license:   GNU GPL version 2 or later, see LICENSE for details
+"""
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 

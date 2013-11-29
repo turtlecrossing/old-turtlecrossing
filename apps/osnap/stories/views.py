@@ -1,3 +1,11 @@
+"""
+osnap.stories.views
+===================
+Views for working with stories directly. (All class-based, of course.)
+
+:copyright: (C) 2013 Matthew Frazier
+:license:   GNU GPL version 2 or later, see LICENSE for details
+"""
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView

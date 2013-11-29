@@ -1,4 +1,11 @@
-"""Development settings and globals."""
+"""
+turtlecrossing.settings.local
+=============================
+Settings which are intended for a dev's local machine.
+
+:copyright: (C) 2013 Matthew Frazier
+:license:   GNU GPL version 2 or later, see LICENSE for details
+"""
 from os.path import join, normpath
 
 from base import *

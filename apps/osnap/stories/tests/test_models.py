@@ -1,3 +1,11 @@
+"""
+osnap.stories.tests.test_models
+===============================
+These test custom Python code in our models.
+
+:copyright: (C) 2013 Matthew Frazier
+:license:   GNU GPL version 2 or later, see LICENSE for details
+"""
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.test import SimpleTestCase
 

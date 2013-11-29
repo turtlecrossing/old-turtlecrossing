@@ -1,3 +1,11 @@
+"""
+turtlecrossing.settings.test
+============================
+Settings which apply when tests are running.
+
+:copyright: (C) 2013 Matthew Frazier
+:license:   GNU GPL version 2 or later, see LICENSE for details
+"""
 from base import *
 
 ########## IN-MEMORY TEST DATABASE
