@@ -15,13 +15,15 @@ from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 
-# Create your models here.
+from .managers import StoryManager
 
 @python_2_unicode_compatible
 class Story(models.Model):
     """
     Represents a news story - either a link, or a text post (but not both!).
     """
+    objects = StoryManager()
+
     title       = models.CharField(u"Title", max_length=127,
                     help_text=u"The post's title, which is shown in lists.")
 

@@ -5,3 +5,23 @@ body {
     padding-bottom: 20px;
 }
 
+
+.alert-stack {
+    margin-bottom: @line-height-computed;
+
+    > .alert {
+        margin-bottom: 0;
+        border-radius: 0;
+    }
+
+    > .alert:first-child {
+        border-top-left-radius: @alert-border-radius;
+        border-top-right-radius: @alert-border-radius;
+    }
+
+    > .alert:last-child {
+        border-bottom-left-radius: @alert-border-radius;
+        border-bottom-right-radius: @alert-border-radius;
+    }
+}
+

@@ -80,6 +80,11 @@ USE_TZ = True
 ########## END GENERAL CONFIGURATION
 
 
+########## OSNAP CONFIGURATION
+OSNAP_DUPLICATE_FILTER_HOURS = 48
+########## END OSNAP CONFIGURATION
+
+
 ########## MEDIA CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#media-root
 MEDIA_ROOT = normpath(join(PUBLIC_ROOT, 'media'))
@@ -111,9 +116,19 @@ STATICFILES_FINDERS = (
 COMPRESS_PRECOMPILERS = (
     ('text/less',       'lessc {infile} {outfile}'),
 )
-
-CRISPY_TEMPLATE_PACK = 'bootstrap3'
 ########## END STATIC FILE CONFIGURATION
+
+
+########## APPEARANCE CONFIGURATION
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
+
+# Necessary because Bootstrap uses 'danger' for error messages.
+from django.contrib.messages import constants as messages
+
+MESSAGE_TAGS = {
+    messages.ERROR:     'danger'
+}
+########## END APPEARANCE CONFIGURATION
 
 
 ########## SECRET CONFIGURATION

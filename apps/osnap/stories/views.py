@@ -9,6 +9,8 @@ Views for working with stories directly. (All class-based, of course.)
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
+from django.utils.translation import ugettext as _
+from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 from .forms import StorySubmitForm
@@ -45,8 +47,15 @@ class SubmitStoryView(CreateView):
 
     def form_valid(self, form):
         story = form.save(commit=False)
-        story.submitter = self.request.user
-        story.save()
+        dupe = Story.objects.find_duplicate_link(story)
 
-        return HttpResponseRedirect(story.get_absolute_url())
+        if dupe:
+            messages.info(self.request,
+                _(u"This story was submitted recently by another user.")
+            )
+            return HttpResponseRedirect(dupe.get_absolute_url())
+        else:
+            story.submitter = self.request.user
+            story.save()
+            return HttpResponseRedirect(story.get_absolute_url())
 
