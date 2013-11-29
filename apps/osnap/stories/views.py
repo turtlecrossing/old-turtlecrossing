@@ -1,6 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
+from django.contrib.auth.decorators import login_required
 
+from .forms import StorySubmitForm
 from .models import Story
+from .utils import decorated_view
 
 # Create your views here.
 
@@ -20,4 +25,20 @@ class StoryDetailView(DetailView):
 
     template_name = "osnap/stories/detail.html"
     context_object_name = "story"
+
+
+@decorated_view(login_required)
+class SubmitStoryView(CreateView):
+    model = Story
+    form_class = StorySubmitForm
+
+    template_name = "osnap/stories/submit.html"
+    context_object_name = "story"
+
+    def form_valid(self, form):
+        story = form.save(commit=False)
+        story.submitter = self.request.user
+        story.save()
+
+        return HttpResponseRedirect(story.get_absolute_url())
 

@@ -1,0 +1,49 @@
+{% extends "skeleton.html" %}
+
+{% comment %}
+    Shows the form for submitting a story.
+    (Powers to edit stories are only granted to staff.)
+
+    Template variables:
+    form - The form object to display. Required.
+{% endcomment %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Submit Story" %}{% endblock title %}
+
+
+{% block body %}
+
+    <h2>{% trans "Submit Story" %}</h2>
+
+    <div class="split-main-sidebar">
+        <div class="split-main">
+            <form action="{% url 'osnap-story-submit' %}" method="POST">
+                {% csrf_token %}
+                {{ form|as_crispy_errors }}
+
+                {{ form.title|as_crispy_field }}
+
+                {{ form.url|as_crispy_field }}
+
+                {{ form.text|as_crispy_field }}
+
+                <div class="form-actions">
+                    <button type="submit">{% trans "Submit" %}</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="split-sidebar">
+            <aside class="help-text">
+                <p>
+                    You can submit text or a URL, but not both.
+                </p>
+            </aside>
+        </div>
+    </div>
+
+{% endblock body %}
+

@@ -1,7 +1,7 @@
 from django.conf.urls import patterns
 from django.conf.urls import url
 
-from .views import FrontPageView, StoryDetailView
+from .views import FrontPageView, StoryDetailView, SubmitStoryView
 
 urlpatterns = patterns("",
     url(
@@ -13,6 +13,11 @@ urlpatterns = patterns("",
         regex=r"^stories/(?P<id>\d+)/$",
         view=StoryDetailView.as_view(),
         name="osnap-story-detail"
+    ),
+    url(
+        regex=r"^stories/submit/$",
+        view=SubmitStoryView.as_view(),
+        name="osnap-story-submit"
     ),
 )
 

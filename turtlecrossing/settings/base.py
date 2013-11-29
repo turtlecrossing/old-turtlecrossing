@@ -105,6 +105,8 @@ STATICFILES_FINDERS = (
 COMPRESS_PRECOMPILERS = (
     ('text/less',       'lessc {infile} {outfile}'),
 )
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 ########## END STATIC FILE CONFIGURATION
 
 
@@ -198,6 +200,7 @@ THIRD_PARTY_APPS = (
     # Database migration helpers:
     'south',
     'compressor',
+    'crispy_forms',
 )
 
 # Apps specific for this project go here.
