@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 osnap.stories.views
 ===================
@@ -6,6 +7,7 @@ Views for working with stories directly. (All class-based, of course.)
 :copyright: (C) 2013 Matthew Frazier
 :license:   GNU GPL version 2 or later, see LICENSE for details
 """
+from __future__ import unicode_literals
 from django.http import HttpResponseRedirect
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView
@@ -51,7 +53,7 @@ class SubmitStoryView(CreateView):
 
         if dupe:
             messages.info(self.request,
-                _(u"This story was submitted recently by another user.")
+                _("This story was submitted recently by another user.")
             )
             return HttpResponseRedirect(dupe.get_absolute_url())
         else:

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 osnap.stories.managers
 ======================
@@ -6,6 +7,7 @@ Managers that handle advanced database-related functionality.
 :copyright: (C) 2013 Matthew Frazier
 :license:   GNU GPL version 2 or later, see LICENSE for details
 """
+from __future__ import unicode_literals
 from datetime import timedelta
 
 from django.conf import settings

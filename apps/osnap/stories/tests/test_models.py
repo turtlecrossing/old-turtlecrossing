@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 osnap.stories.tests.test_models
 ===============================
@@ -6,6 +7,7 @@ These test custom Python code in our models.
 :copyright: (C) 2013 Matthew Frazier
 :license:   GNU GPL version 2 or later, see LICENSE for details
 """
+from __future__ import unicode_literals
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.test import SimpleTestCase
 
@@ -13,39 +15,39 @@ from ..models import Story
 
 class StoryModelTests(SimpleTestCase):
     def test_summaries(self):
-        link = Story(title=u"Best Web site ever",
-                     url=u"http://www.example.com/")
+        link = Story(title="Best Web site ever",
+                     url="http://www.example.com/")
 
-        self.assertEquals(str(link), u"Best Web site ever")
-        self.assertEquals(link.domain, u"www.example.com")
+        self.assertEquals(str(link), "Best Web site ever")
+        self.assertEquals(link.domain, "www.example.com")
 
-        question = Story(title=u"How do I get into Red Hat Tower?",
-                         text=u"I just wanted to see the Linux but "
-                              u"the security guard threw me out. :-(")
+        question = Story(title="How do I get into Red Hat Tower?",
+                         text="I just wanted to see the Linux but "
+                              "the security guard threw me out. :-(")
 
-        self.assertEquals(str(question), u"How do I get into Red Hat Tower?")
-        self.assertEquals(question.domain, u"")
+        self.assertEquals(str(question), "How do I get into Red Hat Tower?")
+        self.assertEquals(question.domain, "")
 
     def test_get_absolute_url(self):
         # Besides coverage, the main goal of testing this is to avoid
         # breaking links.
-        link = Story(title=u"Best Web site ever",
-                     url=u"http://www.example.com/",
+        link = Story(title="Best Web site ever",
+                     url="http://www.example.com/",
                      id=555)
 
         self.assertEquals(link.get_absolute_url(), "/stories/555/")
 
     def test_content_types(self):
-        story = Story(title=u"Best Web site ever")
+        story = Story(title="Best Web site ever")
         self.assertModelDoesNotValidate(story, 'neither_type')
 
-        story.url = u"http://www.example.com/"
+        story.url = "http://www.example.com/"
         self.assertModelValidates(story)
 
-        story.text = u"Seriously, it's great."
+        story.text = "Seriously, it's great."
         self.assertModelDoesNotValidate(story, 'both_types')
 
-        story.url = u""
+        story.url = ""
         self.assertModelValidates(story)
 
     ### Helpers - to be ported to a reusable app

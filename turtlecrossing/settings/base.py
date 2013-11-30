@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 turtlecrossing.settings.base
 ============================
@@ -6,6 +7,7 @@ Settings which apply in all environments.
 :copyright: (C) 2013 Matthew Frazier
 :license:   GNU GPL version 2 or later, see LICENSE for details
 """
+from __future__ import unicode_literals
 from os.path import abspath, basename, dirname, join, normpath
 from sys import path
 

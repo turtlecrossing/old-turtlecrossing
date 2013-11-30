@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 osnap.stories.tests.test_models
 ===============================
@@ -6,16 +7,18 @@ These test our industry-standard `utils.py` file full of random stuff.
 :copyright: (C) 2013 Matthew Frazier
 :license:   GNU GPL version 2 or later, see LICENSE for details
 """
+from __future__ import unicode_literals
 from functools import wraps
 
 from django.test import SimpleTestCase
+from django.utils.six import text_type
 
 from ..utils import decorated_view
 
 def stringify_inputs(f):
     @wraps(f)
     def stringify(arg):
-        return f(str(arg))
+        return f(text_type(arg))
     return stringify
 
 

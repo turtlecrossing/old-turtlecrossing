@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 osnap.stories.utils
 ===================
@@ -6,6 +7,7 @@ Industry-standard `utils.py` file full of random stuff.
 :copyright: (C) 2013 Matthew Frazier
 :license:   GNU GPL version 2 or later, see LICENSE for details
 """
+from __future__ import unicode_literals
 from django.utils.decorators import method_decorator
 
 def decorated_view(decorator):

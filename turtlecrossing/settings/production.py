@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 turtlecrossing.settings.production
 ==================================
@@ -6,6 +7,7 @@ Settings which apply when Turtle Crossing is running in production.
 :copyright: (C) 2013 Matthew Frazier
 :license:   GNU GPL version 2 or later, see LICENSE for details
 """
+from __future__ import unicode_literals
 from os import environ
 
 from base import *

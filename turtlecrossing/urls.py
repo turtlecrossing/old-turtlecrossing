@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 turtlecrossing.urls
 ===================
@@ -6,6 +7,7 @@ The project's root URLConf!
 :copyright: (C) 2013 Matthew Frazier
 :license:   GNU GPL version 2 or later, see LICENSE for details
 """
+from __future__ import unicode_literals
 from django.conf.urls import patterns, include, url
 from django.views.generic import TemplateView
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 osnap.stories.urls
 ==================
@@ -7,6 +8,7 @@ as a prefix. (I may need to rethink this in the future.)
 :copyright: (C) 2013 Matthew Frazier
 :license:   GNU GPL version 2 or later, see LICENSE for details
 """
+from __future__ import unicode_literals
 from django.conf.urls import patterns
 from django.conf.urls import url
 

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 osnap.stories.admin
 ===================
@@ -6,6 +7,7 @@ Configuration for the Django admin interface.
 :copyright: (C) 2013 Matthew Frazier
 :license:   GNU GPL version 2 or later, see LICENSE for details
 """
+from __future__ import unicode_literals
 from django.contrib import admin
 
 from .models import Story

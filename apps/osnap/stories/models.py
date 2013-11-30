@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 """
 osnap.stories.models
 ====================
@@ -6,6 +7,7 @@ Database models! These are fairly simple.
 :copyright: (C) 2013 Matthew Frazier
 :license:   GNU GPL version 2 or later, see LICENSE for details
 """
+from __future__ import unicode_literals
 from urlparse import urlparse
 
 from django.conf import settings
@@ -24,29 +26,30 @@ class Story(models.Model):
     """
     objects = StoryManager()
 
-    title       = models.CharField(u"Title", max_length=127,
-                    help_text=u"The post's title, which is shown in lists.")
+    title       = models.CharField(_("title"), max_length=127,
+                    help_text=_("the post's title, which is shown in lists."))
 
-    url         = models.URLField(u"URL", blank=True,
-                    help_text=u"The URL of an article to discuss. "
-                              u"Mutually exclusive with Text.")
+    url         = models.URLField(_("URL"), blank=True,
+                    help_text=_("The URL of an article to discuss. "
+                                "Mutually exclusive with Text."))
 
-    text        = models.TextField(u"Text", blank=True,
-                    help_text=u"The post's content, for standalone posts. "
-                              u"Mutually exclusive with URL.")
+    text        = models.TextField(_("text"), blank=True,
+                    help_text=_("The post's content, for standalone posts. "
+                                "Mutually exclusive with URL."))
 
-    submit_date = models.DateTimeField(u"Submitted at", default=timezone.now)
+    submit_date = models.DateTimeField(_("submitted at"), default=timezone.now)
 
     submitter   = models.ForeignKey(settings.AUTH_USER_MODEL,
-                    verbose_name=u"Submitter",
+                    verbose_name=_("submitter"),
                     blank=True, null=True, on_delete=models.SET_NULL)
 
-    published   = models.BooleanField(u"Published", default=True,
-                    help_text=u"Uncheck, and the story disappears from "
-                              u"the site.")
+    published   = models.BooleanField(_("published"), default=True,
+                    help_text=_("Uncheck, and the story disappears from "
+                                "the site."))
 
     class Meta:
-        verbose_name_plural = u"stories"
+        verbose_name = _("story")
+        verbose_name_plural = _("stories")
 
         get_latest_by = "submit_date"
         ordering = ('-submit_date',)
@@ -62,13 +65,13 @@ class Story(models.Model):
         # This means, "if there are both or neither."
         if not (self.url or self.text):
             raise ValidationError(
-                _(u"A story must include a URL or text."),
+                _("A story must include a URL or text."),
                 code='neither_type'
             )
 
         if self.url and self.text:
             raise ValidationError(
-                _(u"A story cannot include both a URL and text."),
+                _("A story cannot include both a URL and text."),
                 code='both_types'
             )
 
