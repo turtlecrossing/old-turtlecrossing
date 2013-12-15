@@ -23,5 +23,7 @@ urlpatterns = patterns('',
 
     # Everything here is really under stories/.
     url(r'^', include('osnap.stories.urls')),
+
+    url(r'^', include('osnap.people.urls')),
 )
 

@@ -79,3 +79,29 @@
     .panel-like();
 }
 
+
+/*** USERS ***/
+
+.profile-header {
+    .page-header;
+
+    .username {
+        font-weight: bold;
+    }
+
+    .full-name {
+        &:before { content: '('; }
+        &:after  { content: ')'; }
+
+        color: @gray;
+    }
+}
+
+.profile-info {
+    .make-md-column(6);
+}
+
+.profile-stats {
+    .list-unstyled;
+}
+

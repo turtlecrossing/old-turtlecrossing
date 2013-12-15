@@ -23,8 +23,9 @@
 
 <p class="story-byline">
     {% if story.submitter %}
+        {% url 'osnap-profile' username=story.submitter.username as profile_url %}
         {% blocktrans with username=story.submitter.username %}
-            submitted by {{ username }}
+            submitted by <a href="{{ profile_url }}">{{ username }}</a>
         {% endblocktrans %}
     {% else %}
         {% trans "submitted by a ghost" %}

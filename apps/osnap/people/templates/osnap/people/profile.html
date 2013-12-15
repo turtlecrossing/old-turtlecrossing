@@ -1,0 +1,49 @@
+{% extends "skeleton.html" %}
+
+{% comment %}
+    Displays a user's profile.
+
+    Template variables:
+    subject - A subject to display the information of. Required.
+              It can't be "user" because of the auth context processor.
+
+    Copyright:  (C) 2013 Matthew Frazier.
+    License:    GNU GPL version 2 or later, see LICENSE for details.
+{% endcomment %}
+
+{% load humanize %}
+{% load i18n %}
+
+{% block title %}{{ story.title }}{% endblock title %}
+
+
+{% block body %}
+
+    <h1 class="profile-header">
+        <span class="username">{{ subject.username }}</span>
+        {% if subject.full_name %}<span class="full-name">{{ subject.full_name }}</span>{% endif %}
+    </h1>
+
+    <div class="profile-info">
+        <ul class="profile-stats">
+            <li class="join-date">
+                <date datetime="{{ subject.date_joined|date:'c' }}" title="{{ subject.date_joined|date:'DATETIME_FORMAT' }}">
+                    {% blocktrans with date=subject.date_joined|naturalday %}Joined {{ date }}{% endblocktrans %}
+                </date>
+            </li>
+        </ul>
+
+        {% if subject.biography %}
+            <div class="biography">
+                {# TODO: Markdown. #}
+                {{ subject.biography|linebreaks }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="recent-activity">
+        <!-- Eventually there will be stuff here. -->
+    </div>
+
+{% endblock body %}
+
