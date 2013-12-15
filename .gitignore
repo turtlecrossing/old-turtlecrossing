@@ -10,6 +10,7 @@
 
 # Testing:
 .coverage
+/coverage
 
 # Packaging files:
 *.egg*

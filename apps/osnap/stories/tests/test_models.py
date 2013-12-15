@@ -10,6 +10,7 @@ These test custom Python code in our models.
 from __future__ import unicode_literals
 from django.core.exceptions import ValidationError, NON_FIELD_ERRORS
 from django.test import SimpleTestCase
+from django.utils import six
 
 from ..models import Story
 
@@ -73,7 +74,7 @@ class StoryModelTests(SimpleTestCase):
         for field, codes in field_codes.items():
             self.assertIn(field, errors)
 
-            if isinstance(codes, str):
+            if isinstance(codes, six.string_types):
                 codes = set([codes])
             else:
                 codes = set(codes)
