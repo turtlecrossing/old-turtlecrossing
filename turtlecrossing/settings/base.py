@@ -46,6 +46,11 @@ MANAGERS = ADMINS
 ########## END MANAGER CONFIGURATION
 
 
+########## AUTHENTICATION CONFIGURATION
+AUTH_USER_MODEL = 'people.User'
+########## END AUTHENTICATION CONFIGURATION
+
+
 ########## DATABASE CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
@@ -229,6 +234,7 @@ THIRD_PARTY_APPS = (
 # Apps specific for this project go here.
 LOCAL_APPS = (
     'osnap.stories',
+    'osnap.people',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
