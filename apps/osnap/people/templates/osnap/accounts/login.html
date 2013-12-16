@@ -1,0 +1,48 @@
+{% extends "skeleton-narrow.html" %}
+
+{% comment %}
+    Shows the form for logging in.
+
+    Template variables:
+    form - The form to use. Required.
+    next - The URL to redirect to after logging in.
+
+    Copyright:  (C) 2013 Matthew Frazier.
+    License:    GNU GPL version 2 or later, see LICENSE for details.
+{% endcomment %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Log in" %}{% endblock title %}
+
+
+{% block body %}
+
+    <h1>
+        {% trans "Log in" %}
+    </h1>
+
+    <p>
+        {% trans "Don't have an account with us?" %}
+        <a href="#">{% trans "Register a new account." %}</a>
+        <br>
+        {% trans "Forgot your password?" %}
+        <a href="{% url 'accounts_password_reset' %}">{% trans "Reset it using your email address." %}</a>
+    </p>
+
+    <form action="" method="POST">
+        {% csrf_token %}
+        {{ form|as_crispy_errors }}
+
+        {{ form.username|as_crispy_field }}
+
+        {{ form.password|as_crispy_field }}
+
+        <div class="form-actions">
+            <button type="submit">{% trans "Log in" %}</button>
+        </div>
+    </form>
+
+{% endblock body %}
+

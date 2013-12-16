@@ -206,6 +206,11 @@ ROOT_URLCONF = '%s.urls' % PROJECT_NAME
 ########## END URL CONFIGURATION
 
 
+########## AUTH CONFIGURATION
+LOGIN_REDIRECT_URL = '/'
+########## END AUTH CONFIGURATION
+
+
 ########## APP CONFIGURATION
 DJANGO_APPS = (
     # Default Django apps:
