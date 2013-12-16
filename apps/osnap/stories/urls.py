@@ -18,17 +18,17 @@ urlpatterns = patterns("",
     url(
         regex=r"^$",
         view=FrontPageView.as_view(),
-        name="osnap-front-page"
+        name="osnap_front_page"
     ),
     url(
         regex=r"^stories/(?P<id>\d+)/$",
         view=StoryDetailView.as_view(),
-        name="osnap-story-detail"
+        name="osnap_story_detail"
     ),
     url(
         regex=r"^stories/submit/$",
         view=SubmitStoryView.as_view(),
-        name="osnap-story-submit"
+        name="osnap_story_submit"
     ),
 )
 

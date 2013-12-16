@@ -16,7 +16,7 @@ urlpatterns = patterns('',
     url(
         regex=r"^~(?P<username>[a-zA-Z0-9_]+)/$",
         view=ProfileView.as_view(),
-        name="osnap-profile"
+        name="osnap_profile"
     ),
 )
 

@@ -23,7 +23,7 @@
 
     <div class="split-main-sidebar">
         <div class="split-main">
-            <form action="{% url 'osnap-story-submit' %}" method="POST">
+            <form action="{% url 'osnap_story_submit' %}" method="POST">
                 {% csrf_token %}
                 {{ form|as_crispy_errors }}
 
