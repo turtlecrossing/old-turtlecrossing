@@ -36,7 +36,7 @@ class User(AbstractBaseUser, PermissionsMixin):
                             _("Enter a valid username."), 'invalid'
                         )
                     ])
-    email       = models.EmailField(_('email address'), blank=True)
+    email       = models.EmailField(_('email address'), unique=True)
 
     date_joined = models.DateTimeField(_('date joined'), default=timezone.now)
     is_staff    = models.BooleanField(_('staff status'), default=False,

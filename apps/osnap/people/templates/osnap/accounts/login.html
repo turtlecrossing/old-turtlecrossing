@@ -25,10 +25,14 @@
 
     <p>
         {% trans "Don't have an account with us?" %}
-        <a href="#">{% trans "Register a new account." %}</a>
+        <a href="{% url 'accounts_register' %}">
+            {% trans "Register a new account." %}
+        </a>
         <br>
         {% trans "Forgot your password?" %}
-        <a href="{% url 'accounts_password_reset' %}">{% trans "Reset it using your email address." %}</a>
+        <a href="{% url 'accounts_password_reset' %}">
+            {% trans "Reset it using your email address." %}
+        </a>
     </p>
 
     <form action="" method="POST">

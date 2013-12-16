@@ -15,10 +15,14 @@
 {% block title %}
     {% if action == "logged out" %}
         {% trans "Logged out" %}
+    {% elif action == "registered" %}
+        {% trans "Registered" %}
     {% elif action == "password reset requested" %}
         {% trans "Password reset requested" %}
     {% elif action == "password reset" %}
         {% trans "Password reset" %}
+    {% elif action == "bad link" %}
+        {% trans "Error" %}
     {% endif %}
 {% endblock title %}
 
@@ -28,20 +32,28 @@
     <h1>
         {% if action == "logged out" %}
             {% trans "Logged out" %}
+        {% elif action == "registered" %}
+            {% trans "Registered" %}
         {% elif action == "password reset requested" %}
             {% trans "Password reset requested" %}
         {% elif action == "password reset" %}
             {% trans "Password reset" %}
+        {% elif action == "bad link" %}
+            {% trans "Error" %}
         {% endif %}
     </h1>
 
     <p>
         {% if action == "logged out" %}
             {% trans "Thanks for visiting." %}
+        {% elif action == "registered" %}
+            {% trans "Check your email for the activation link." %}
         {% elif action == "password reset requested" %}
-            {% trans "Check your e-mail for the password reset link." %}
+            {% trans "Check your email for the password reset link." %}
         {% elif action == "password reset" %}
             {% trans "You may now log in with the new password." %}
+        {% elif action == "bad link" %}
+            {% trans "That link is not valid. Please try again." %}
         {% endif %}
     </p>
 

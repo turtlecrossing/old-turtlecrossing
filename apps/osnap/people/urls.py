@@ -10,7 +10,7 @@ All the account-related URL's.
 from __future__ import unicode_literals
 from django.conf.urls import patterns, include, url
 from django.contrib.auth import views as auth_views
-from .views import ProfileView
+from .views import ProfileView, RegisterView, activate_account
 
 
 account_urls = patterns('',
@@ -29,13 +29,25 @@ account_urls = patterns('',
         name='accounts_logout'
     ),
 
+    # Registration, Activation
+    url(
+        regex=r'^register/$',
+        view=RegisterView.as_view(),
+        name='accounts_register'
+    ),
+    url(
+        regex=r'^activate/(?P<token>.+)/$',
+        view=activate_account,
+        name='accounts_activate'
+    ),
+
     # Reset Password
     url(
         regex=r'^password/reset/$',
         view=auth_views.password_reset,
-        kwargs={'template_name': 'osnap/accounts/password-reset.html',
-                'email_template_name': 'osnap/accounts/password-reset-email.txt',
-                'subject_template_name': 'osnap/accounts/password-reset-subject.txt'},
+        kwargs={'template_name': 'osnap/accounts/password-reset/request.html',
+                'email_template_name': 'osnap/accounts/password-reset/email.txt',
+                'subject_template_name': 'osnap/accounts/password-reset/email-subject.txt'},
         name='accounts_password_reset'
     ),
     url(
@@ -48,7 +60,7 @@ account_urls = patterns('',
     url(
         regex=r'^password/reset/confirm/(?P<uidb64>[0-9A-Za-z]+)-(?P<token>.+)/$',
         view=auth_views.password_reset_confirm,
-        kwargs={'template_name': 'osnap/accounts/password-reset-confirm.html'},
+        kwargs={'template_name': 'osnap/accounts/password-reset/confirm.html'},
         name='accounts_password_reset_confirm'
     ),
     url(

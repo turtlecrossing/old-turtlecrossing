@@ -11,4 +11,5 @@ If this was not you, either ignore this email, or contact our staff.
 
 Thanks,
 {{ site_name }}
+{{ protocol }}://{{ domain }}/
 

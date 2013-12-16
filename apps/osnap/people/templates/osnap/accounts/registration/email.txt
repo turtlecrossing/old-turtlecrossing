@@ -1,0 +1,13 @@
+Hello, {{ user.username }}!
+
+Thanks for signing up with {{ site_name }}!
+To finish registering, just click the link below:
+
+    {{ protocol }}://{{ domain }}{% url 'accounts_activate' token=token %}
+
+If this was not you, either ignore this email, or contact our staff.
+
+Thanks,
+{{ site_name }}
+{{ protocol }}://{{ domain }}/
+

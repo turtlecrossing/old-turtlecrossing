@@ -1,0 +1,65 @@
+{% extends "skeleton.html" %}
+
+{% comment %}
+    Shows a form for users to register.
+
+    Template variables:
+    form - The form with the user's required information. Required.
+
+    Copyright:  (C) 2013 Matthew Frazier.
+    License:    GNU GPL version 2 or later, see LICENSE for details.
+{% endcomment %}
+
+{% load i18n %}
+{% load crispy_forms_tags %}
+
+{% block title %}{% trans "Register" %}{% endblock title %}
+
+
+{% block body %}
+
+    <h1>
+        {% trans "Register for an account" %}
+    </h1>
+
+    <div class="split-main-sidebar">
+        <div class="split-main">
+            <p>
+                {% blocktrans %}
+                    First, choose a username and password,
+                    and enter your email address.
+                    You will be sent an email with a link to activate your account.
+                    Then, you can participate in the site and fill out the rest
+                    of your profile.
+                {% endblocktrans %}
+            </p>
+
+            <form action="" method="POST">
+                {% csrf_token %}
+                {{ form|as_crispy_errors }}
+
+                {{ form.username|as_crispy_field }}
+
+                {{ form.email|as_crispy_field }}
+
+                {{ form.password1|as_crispy_field }}
+
+                {{ form.password2|as_crispy_field }}
+
+                <div class="form-actions">
+                    <button type="submit">{% trans "Register" %}</button>
+                </div>
+            </form>
+        </div>
+
+        <div class="split-sidebar">
+            <aside class="help-text">
+                <p>
+                    The Code of Conduct will go here soon.
+                </p>
+            </aside>
+        </div>
+    </div>
+
+{% endblock body %}
+
