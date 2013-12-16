@@ -11,6 +11,7 @@
     License:    GNU GPL version 2 or later, see LICENSE for details.
 {% endcomment %}
 
+{% load gravatar %}
 {% load humanize %}
 {% load i18n %}
 
@@ -20,6 +21,7 @@
 {% block body %}
 
     <h1 class="profile-header">
+        {% gravatar_img_for_user subject 64 %}
         <span class="username">{{ subject.username }}</span>
         {% if subject.full_name %}<span class="full-name">{{ subject.full_name }}</span>{% endif %}
     </h1>

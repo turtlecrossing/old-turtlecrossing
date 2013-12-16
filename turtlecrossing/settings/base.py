@@ -135,6 +135,10 @@ from django.contrib.messages import constants as messages
 MESSAGE_TAGS = {
     messages.ERROR:     'danger'
 }
+
+# Gravatars
+GRAVATAR_DEFAULT_IMAGE = 'identicon'
+GRAVATAR_DEFAULT_RATING = 'g'
 ########## END APPEARANCE CONFIGURATION
 
 

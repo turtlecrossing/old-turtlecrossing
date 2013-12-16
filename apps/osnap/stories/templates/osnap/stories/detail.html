@@ -10,6 +10,7 @@
     License:    GNU GPL version 2 or later, see LICENSE for details.
 {% endcomment %}
 
+{% load gravatar %}
 {% load i18n %}
 
 {% block title %}{{ story.title }}{% endblock title %}
@@ -23,8 +24,21 @@
 
     {% if story.text %}
         <div class="story-text">
-            {# TODO: Markdown. #}
-            {{ story.text|linebreaks }}
+            {% if story.submitter %}
+                <a class="author-avatar" href="{% url 'osnap_profile' username=story.submitter.username %}">
+                    {% gravatar_img_for_user story.submitter 64 %}
+                </a>
+            {% else %}
+                <span class="author-avatar">
+                    {# Arbitrary email. It generates a mostly empty and sharp Gravatar. #}
+                    {% gravatar_img_for_email 'aabc@example.com' 64 %}
+                </span>
+            {% endif %}
+
+            <div class="story-text-content">
+                {# TODO: Markdown. #}
+                {{ story.text|linebreaks }}
+            </div>
         </div>
     {% else %}
         <hr>
