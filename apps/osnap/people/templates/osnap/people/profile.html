@@ -14,7 +14,7 @@
 {% load humanize %}
 {% load i18n %}
 
-{% block title %}{{ story.title }}{% endblock title %}
+{% block title %}{% blocktrans with username=subject.username %}{{ username }}'s profile{% endblocktrans %}{% endblock title %}
 
 
 {% block body %}
