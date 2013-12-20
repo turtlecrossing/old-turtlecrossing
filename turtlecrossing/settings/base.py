@@ -240,14 +240,17 @@ THIRD_PARTY_APPS = (
     'crispy_forms',
 )
 
-# Apps specific for this project go here.
-LOCAL_APPS = (
+OUR_REUSABLE_APPS = (
+    'democracy',
+)
+
+OSNAP_APPS = (
     'osnap.stories',
     'osnap.people',
 )
 
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
-INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
+INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + OUR_REUSABLE_APPS + OSNAP_APPS
 ########## END APP CONFIGURATION
 
 

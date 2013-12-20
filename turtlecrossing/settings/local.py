@@ -10,7 +10,7 @@ Settings which are intended for a dev's local machine.
 from __future__ import unicode_literals
 from os.path import join, normpath
 
-from base import *
+from .base import *
 
 ########## DEBUG CONFIGURATION
 # See: https://docs.djangoproject.com/en/dev/ref/settings/#debug
