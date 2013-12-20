@@ -23,10 +23,10 @@ class Cheese(models.Model):
     votes = Votable(scores=('optimistic_score', 'pessimistic_score'))
 
     def compute_optimistic_score(self, upvotes, downvotes):
-        return 1 + 2 * upvotes - downvotes
+        return 1 + (2 * upvotes) - downvotes
 
     def compute_pessimistic_score(self, upvotes, downvotes):
-        return 1 + upvotes - 2 * downvotes
+        return 1 + upvotes - (2 * downvotes)
 
     def __str__(self):
         return self.variety
@@ -38,6 +38,7 @@ class CatPicture(models.Model):
 
     votes = Votable(score='vote_count', downvotes_allowed=False)
 
-    def compute_vote_count(self, upvotes, downvotes):
-        return upvotes
+    def compute_vote_count(self, upvotes):
+        # Make us seem more viral than we are
+        return upvotes * 30
 

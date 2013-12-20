@@ -1,0 +1,46 @@
+[
+{
+  "pk": 1,
+  "model": "democracytest.catpicture",
+  "fields": {
+    "caption": "I CAN HAZ BRIE?"
+  }
+},
+{
+  "pk": 2,
+  "model": "democracytest.catpicture",
+  "fields": {
+    "caption": "MONORAIL CAT"
+  }
+},
+{
+  "model": "democracy.vote",
+  "fields": {
+    "user": ["arminius"],
+    "content_type": ["democracytest", "catpicture"],
+    "object_id": 1,
+    "direction": 1,
+    "reason": ""
+  }
+},
+{
+  "model": "democracy.vote",
+  "fields": {
+    "user": ["calvin"],
+    "content_type": ["democracytest", "catpicture"],
+    "object_id": 1,
+    "direction": 1,
+    "reason": ""
+  }
+},
+{
+  "model": "democracy.vote",
+  "fields": {
+    "user": ["wesley"],
+    "content_type": ["democracytest", "catpicture"],
+    "object_id": 1,
+    "direction": 1,
+    "reason": ""
+  }
+}
+]

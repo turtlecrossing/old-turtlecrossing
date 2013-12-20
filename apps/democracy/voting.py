@@ -224,19 +224,19 @@ class ObjectVotes(object):
         """
         directions = self.get_queryset() \
             .filter(effective=True).values('direction') \
-            .count(votes=models.Count('direction'))
+            .annotate(votes=models.Count('direction'))
 
-        counts = dict((row['direction'], row['votes']) for d in directions)
+        counts = dict((d['direction'], d['votes']) for d in directions)
         # Just ignore anything that's not 1 or -1.
         return counts.get(1, 0), counts.get(-1, 0)
 
-    def get_reason_object(self, direction, reason):
+    def get_reason_object(self, direction, reason=''):
         """
         Returns the reason object matching a `direction` and `reason`,
         or `None` if there is none.
         """
         if isinstance(direction, six.text_type):
-            direction = str(direction, 10)
+            direction = int(direction, 10)
         if direction != 1 and direction != -1:
             raise ValueError("Only +1 or -1 can be directions")
 
@@ -246,7 +246,7 @@ class ObjectVotes(object):
 
         return None
 
-    def add_vote(self, user, direction, reason):
+    def add_vote(self, user, direction, reason=''):
         """
         Places a vote on this item, on behalf of a particular user.
         If the user has already voted, it overwrites their vote.
@@ -279,6 +279,13 @@ class ObjectVotes(object):
         # Save the Vote instance.
         # The save() method automatically updates everything.
         vote.save()
+
+        # Because Django doesn't have an identity map, the Vote may query a
+        # fresh copy as its `item`, and so our `item` will stay unchanged.
+        altered_item = vote.item
+        for score in self.settings.scores:
+            setattr(self.item, score, getattr(altered_item, score))
+
         return vote
 
     def remove_vote(self, user):
@@ -293,6 +300,11 @@ class ObjectVotes(object):
             # Okay, yes, there is.
             vote.delete()
 
+        # See above for why I'm doing this.
+        altered_item = vote.item
+        for score in self.settings.scores:
+            setattr(self.item, score, getattr(altered_item, score))
+
     def update_scores(self):
         """
         Recalculates the scores of the item, based on the current vote counts.
@@ -301,12 +313,25 @@ class ObjectVotes(object):
         You should never need to call this yourself, as `AbstractVote`'s save
         and delete methods invoke this automatically. But if you do, call it
         within an `atomic` block.
+
+        It returns a dict of the item's new scores.
         """
         votes = self.item.votes
         upvotes, downvotes = votes.get_vote_counts()
+        new_scores = {}
 
-        # Call object.compute_score(upvotes, downvotes) for each score.
-        for attr in self.scores:
-            compute_method = getattr(self.item, 'compute_' + attr)
-            setattr(self.item, attr, compute_method(upvotes, downvotes))
+        if self.settings.downvotes_allowed:
+            # Call object.compute_score(upvotes, downvotes) for each score.
+            for attr in self.settings.scores:
+                compute_method = getattr(self.item, 'compute_' + attr)
+                score = new_scores[attr] = compute_method(upvotes, downvotes)
+                setattr(self.item, attr, score)
+        else:
+            # Call object.compute_score(upvotes) for each score.
+            for attr in self.settings.scores:
+                compute_method = getattr(self.item, 'compute_' + attr)
+                score = new_scores[attr] = compute_method(upvotes)
+                setattr(self.item, attr, score)
+
+        return new_scores
 

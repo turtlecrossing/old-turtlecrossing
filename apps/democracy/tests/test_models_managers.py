@@ -124,7 +124,6 @@ class VoteReasonModelTest(TestCase, SnakeTestMixin):
 
     def test_for_model_caching(self):
         ctype = ContentType.objects.get_for_model(Cheese)
-        reason = VoteReason(direction=1, reason='Pungent', content_type=ctype)
 
         # Make sure they're cached.
         reasons = VoteReason.objects.get_for_model(Cheese)
@@ -133,10 +132,11 @@ class VoteReasonModelTest(TestCase, SnakeTestMixin):
         self.assert_equal(reasons, ())
 
         # Save the new reason, make sure the cache is expired.
+        reason = VoteReason(direction=1, reason='Sharp', content_type=ctype)
         reason.save()
         with self.assert_num_queries(1):
             reasons = VoteReason.objects.get_for_model(Cheese)
-        self.assert_fields_equal(reasons[0], direction=1, reason='Pungent')
+        self.assert_fields_equal(reasons[0], direction=1, reason='Sharp')
 
         # ...But only for Cheese.
         with self.assert_num_queries(0):
@@ -146,7 +146,7 @@ class VoteReasonModelTest(TestCase, SnakeTestMixin):
         # Also, the cache needs to stay cached.
         with self.assert_num_queries(0):
             reasons = VoteReason.objects.get_for_model(Cheese)
-        self.assert_fields_equal(reasons[0], direction=1, reason='Pungent')
+        self.assert_fields_equal(reasons[0], direction=1, reason='Sharp')
 
         # Oh, deleting it should uncache too.
         reason.delete()

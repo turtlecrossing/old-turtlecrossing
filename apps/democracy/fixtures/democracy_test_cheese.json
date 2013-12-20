@@ -39,6 +39,28 @@
     "direction": -1,
     "reason": ""
   }
+},
+{
+  "model": "democracy.vote",
+  "fields": {
+    "user": ["wesley"],
+    "content_type": ["democracytest", "cheese"],
+    "object_id": 2,
+    "direction": 1,
+    "reason": ""
+  }
+},
+{
+  "model": "democracy.vote",
+  "fields": {
+    "user": ["calvin"],
+    "content_type": ["democracytest", "cheese"],
+    "object_id": 2,
+    "direction": 1,
+    "reason": "",
+    "effective": false,
+    "classifier": "Not an elect vote"
+  }
 }
 ]
 
