@@ -45,11 +45,11 @@ class VoteReasonManager(models.Manager):
         if model in self._reason_cache:
             return self._reason_cache[model]
 
-        vote_settings = model.votes
+        vote_settings = getattr(model, 'votes', None)
 
         # Circular dependencies :-(
         from .voting import VoteSettings
-        if not isinstance(getattr(model, 'votes', None), VoteSettings):
+        if not isinstance(vote_settings, VoteSettings):
             raise TypeError("Models must have a Votable named 'votes'")
 
         ctype = ContentType.objects.get_for_model(model)
@@ -71,15 +71,15 @@ class VoteManager(models.Manager):
     each of these methods as well. But otherwise, we don't do anything
     fancy with the managers.
     """
-    def get_user_vote(self, user, item):
+    def get_user_vote(self, item, user):
         """
         Returns a particular user's `Vote` on an item, or `None` if they
         have not yet voted.
         """
         ctype = ContentType.objects.get_for_model(item)
         try:
-            return self.get(user=user, content_type__pk=ctype.id,
-                            object_id=item.id)
+            return self.get(content_type__pk=ctype.id, object_id=item.id,
+                            user=user)
         except models.ObjectDoesNotExist:
             return None
 
@@ -89,6 +89,5 @@ class VoteManager(models.Manager):
         particular order.
         """
         ctype = ContentType.objects.get_for_model(item)
-        return self.filter(user=user, content_type__pk=ctype.id,
-                           object_id=item.id)
+        return self.filter(content_type__pk=ctype.id, object_id=item.id)
 

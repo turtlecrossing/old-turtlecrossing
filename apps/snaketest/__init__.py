@@ -74,6 +74,10 @@ class SnakeTestMixin(object):
     def assert_not_almost_equal(self, a, b, msg=None):
         return self.assertNotAlmostEqual(a, b, msg)
 
+    # Django's asserts, snakified:
+    def assert_num_queries(self, n, *args, **kwargs):
+        return self.assertNumQueries(n, *args, **kwargs)
+
     # Object-related asserts!
     def assert_instances(self, iterable, cls, msg=None):
         for idx, obj in enumerate(iterable):

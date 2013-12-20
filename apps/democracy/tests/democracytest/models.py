@@ -3,6 +3,7 @@
 democracy.tests.democracytest.models
 ====================================
 Models that we use to test Democracy's database stuff.
+This app is about theologians voting on cheeses and cat pictures.
 
 :copyright: (C) 2013 Matthew Frazier
 :license:   MIT/X11, see package's LICENSE for details
@@ -15,7 +16,7 @@ from ...voting import Votable
 
 @python_2_unicode_compatible
 class Cheese(models.Model):
-    variety = models.CharField(max_length=30)
+    variety = models.CharField(max_length=30, unique=True)
     optimistic_score = models.IntegerField(default=1)
     pessimistic_score = models.IntegerField(default=1)
 

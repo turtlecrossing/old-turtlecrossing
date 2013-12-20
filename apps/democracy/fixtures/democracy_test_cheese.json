@@ -1,0 +1,44 @@
+[
+{
+  "pk": 1,
+  "model": "democracytest.cheese",
+  "fields": {
+    "variety": "Cheddar"
+  }
+},
+{
+  "pk": 2,
+  "model": "democracytest.cheese",
+  "fields": {
+    "variety": "Brie"
+  }
+},
+{
+  "pk": 3,
+  "model": "democracytest.cheese",
+  "fields": {
+    "variety": "Gorgonzola"
+  }
+},
+{
+  "model": "democracy.vote",
+  "fields": {
+    "user": ["arminius"],
+    "content_type": ["democracytest", "cheese"],
+    "object_id": 1,
+    "direction": 1,
+    "reason": ""
+  }
+},
+{
+  "model": "democracy.vote",
+  "fields": {
+    "user": ["wesley"],
+    "content_type": ["democracytest", "cheese"],
+    "object_id": 1,
+    "direction": -1,
+    "reason": ""
+  }
+}
+]
+
