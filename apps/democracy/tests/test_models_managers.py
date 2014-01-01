@@ -88,6 +88,19 @@ class VoteReasonModelTest(TestCase, SnakeTestMixin):
         reason.reason = "Tasty"
         self.assert_str(reason, "+1 Tasty for cheeses")
 
+    def test_descriptions(self):
+        reason = VoteReason(direction=1)
+        self.assert_equal(reason.description, "+1")
+
+        reason.reason = "Tasty"
+        self.assert_equal(reason.description, "+1 Tasty")
+
+        reason.direction = -1
+        self.assert_equal(reason.description, "-1 Tasty")
+
+        reason.reason = ''
+        self.assert_equal(reason.description, "-1")
+
     def test_validate_direction(self):
         ctype = ContentType.objects.get_for_model(Cheese)
 

@@ -78,6 +78,13 @@ class VoteReason(models.Model):
         else:
             return ("%s for %s" % (self.get_direction_display(), model_name))
 
+    @property
+    def description(self):
+        if self.reason:
+            return "%s %s" % (self.get_direction_display(), self.reason)
+        else:
+            return self.get_direction_display()
+
 
 @python_2_unicode_compatible
 class AbstractVote(models.Model):

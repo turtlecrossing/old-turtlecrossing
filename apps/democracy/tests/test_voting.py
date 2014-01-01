@@ -137,6 +137,37 @@ class ObjectVotesTests(TestCase, SnakeTestMixin):
             cheddar.votes.get_reason_object("")
         with self.assert_raises(ValueError):
             cheddar.votes.get_reason_object(0)
+        with self.assert_raises(ValueError):
+            cheddar.votes.get_reason_object("+1", "   ")
+
+    def test_get_reason_combo_strings(self):
+        ctype = ContentType.objects.get_for_model(Cheese)
+        cheddar = Cheese.objects.get(variety='Cheddar')
+
+        reason = VoteReason(direction=1, reason='Pungent', content_type=ctype)
+        reason.save()
+
+        pungent = cheddar.votes.get_reason_object("+1 Pungent")
+        self.assert_fields_equal(pungent, content_type=ctype,
+                                 direction=1, reason='Pungent')
+
+        self.assert_none(cheddar.votes.get_reason_object('+1 Sharp'))
+        self.assert_none(cheddar.votes.get_reason_object('-1 Pungent'))
+        self.assert_none(cheddar.votes.get_reason_object('+1'))
+
+        with self.assert_raises(ValueError):
+            cheddar.votes.get_reason_object("+3 Pungent")
+        with self.assert_raises(ValueError):
+            cheddar.votes.get_reason_object("Pungent")
+        with self.assert_raises(ValueError):
+            cheddar.votes.get_reason_object("+1 ")
+        with self.assert_raises(ValueError):
+            cheddar.votes.get_reason_object("+1   ")
+        with self.assert_raises(ValueError):
+            cheddar.votes.get_reason_object("up")
+
+        # It's surviving somehow....
+        reason.delete()
 
     def test_update_scores(self):
         cheddar = Cheese.objects.get(variety='Cheddar')
@@ -187,4 +218,8 @@ class ObjectVotesTests(TestCase, SnakeTestMixin):
         self.assert_equal(cheddar.votes.get_vote_counts(), (1, 1))
         self.assert_equal(cheddar.optimistic_score, 2)      # 1 + 2 - 1
         self.assert_equal(cheddar.pessimistic_score, 0)     # 1 + 1 - 2
+
+        # Then he tries something unusual.
+        with self.assert_raises(ValueError):
+            cheddar.votes.add_vote(calvin, +1, "Elect")
 

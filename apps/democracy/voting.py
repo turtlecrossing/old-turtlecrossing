@@ -234,9 +234,24 @@ class ObjectVotes(object):
         """
         Returns the reason object matching a `direction` and `reason`,
         or `None` if there is none.
+
+        `direction` can be passed as a string. In addition, if `reason` is
+        blank and `direction` contains a space, the first word of `direction`
+        will be considered a string and the rest will be considered the
+        reason -- so ``"+1 Clever"`` is equivalent to ``(1, "Clever")``.
+        Therefore, you can use `VoteReason.description`.
         """
+        if reason and reason.strip() == '':
+            raise ValueError("Blank reason")
+
         if isinstance(direction, six.text_type):
+            if ' ' in direction and reason == '':
+                direction, reason = direction.split(' ', 1)
+                if reason.strip() == '':
+                    raise ValueError("Blank reason")
+
             direction = int(direction, 10)
+
         if direction != 1 and direction != -1:
             raise ValueError("Only +1 or -1 can be directions")
 
@@ -250,6 +265,9 @@ class ObjectVotes(object):
         """
         Places a vote on this item, on behalf of a particular user.
         If the user has already voted, it overwrites their vote.
+
+        This uses `get_reason_object` to resolve `direction` and `reason`,
+        so any format acceptable there is usable.
 
         :param user:        The user voting.
         :param direction:   The direction they're voting in -- +1 or -1.
